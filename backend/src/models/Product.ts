@@ -15,7 +15,11 @@ export class Product {
     this.productType = productType;
   }
 
+  public getPriceWithoutTaxes(): number {
+    return this.basePrice * (1 - this.discountRate);
+  }
+
   public getPrice(): number {
-    return (this.basePrice * (1 - this.discountRate)) * this.taxRate;
+    return this.getPriceWithoutTaxes() * this.taxRate;
   }
 }
