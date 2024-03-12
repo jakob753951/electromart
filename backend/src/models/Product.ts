@@ -1,18 +1,18 @@
 import { ProductType } from "./ProductType";
 
-export class PlayStation {
+export class Product {
   public title: string;
   public imageUrl: string;
   public basePrice: number;
   public taxRate: number = 1.25;
+  public discountRate: number = 0.1;
+  public productType: ProductType;
 
-  public discountRate: number = 0.15;
-  public productType: ProductType = ProductType.PlayStation;
-
-  constructor(title: string, imageUrl: string, basePrice: number) {
+  constructor(title: string, imageUrl: string, basePrice: number, productType: ProductType) {
     this.title = title;
     this.imageUrl = imageUrl;
     this.basePrice = basePrice;
+    this.productType = productType;
   }
 
   public getPrice(): number {
