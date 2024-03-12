@@ -8,17 +8,13 @@ export class Product {
   public discountRate: number;
   public productType: ProductType;
 
-  constructor(title: string, imageUrl: string, basePrice: number, productType: ProductType) {
+  constructor(title: string, imageUrl: string, basePrice: number, taxRate: number, discountRate: number, productType: ProductType) {
     this.title = title;
     this.imageUrl = imageUrl;
     this.basePrice = basePrice;
+    this.taxRate = taxRate;
+    this.discountRate = discountRate;
     this.productType = productType;
-
-    const parsedTaxRate = parseFloat(process.env.TAX_RATE ?? '1.25');
-    this.taxRate = isNaN(parsedTaxRate) ? 1.25 : parsedTaxRate;
-
-    const parsedDiscountRate = parseFloat(process.env.DISCOUNT_RATE ?? '0.10');
-    this.discountRate = isNaN(parsedDiscountRate) ? 0.10 : parsedDiscountRate;
   }
 
   public getPriceWithoutTaxes(): number {
@@ -26,6 +22,6 @@ export class Product {
   }
 
   public getPrice(): number {
-    return this.getPriceWithoutTaxes() * this.taxRate;
+    return Math.round(this.getPriceWithoutTaxes() * this.taxRate);
   }
 }

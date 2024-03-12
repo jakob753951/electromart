@@ -15,3 +15,5 @@ services:
       dockerfile: Dockerfile
     ports:
       - "3001:3001"
+    environment:
+      TAX_RATE: "2.00"

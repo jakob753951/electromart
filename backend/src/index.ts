@@ -11,7 +11,7 @@ app.use(express.json());
 app.get("/get-product-recommendations", (_: Request, res: Response) => {
   const randomNumber = Math.random();
 
-  if (randomNumber > 0.5) {
+  if (randomNumber > 1) {
     const shuffledProducts = recommendedProducts
       .map(value => ({ value, sort: Math.random() }))
       .sort((a, b) => a.sort - b.sort)
@@ -25,9 +25,8 @@ app.get("/get-product-recommendations", (_: Request, res: Response) => {
 });
 
 app.get("/get-products-by-category", (req: Request, res: Response) => {
-  const products = recommendedProducts.filter((product) => {
-    if (product.productType == req.query.productType) return product;
-  })
+  const products = recommendedProducts
+    .filter(product => product.productType == req.query.productType)
 
   return res.json(products);
 });
